@@ -150,3 +150,6 @@ vite.config.ts.timestamp-*
 
 # vercel
 .vercel/
+
+# keep the documented template (must come after .env.*)
+!.env.example
