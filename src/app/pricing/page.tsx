@@ -13,64 +13,81 @@ const TIERS = [
   {
     id: "free",
     name: "Free",
-    price: "$0",
-    cadence: "no card required",
+    price: 0,
+    cadence: "forever",
+    priceNote: "No card required",
     kicker: "For occasional reading",
     blurb: "Limited paper analyses and basic summaries.",
     cta: { label: "Start free", href: "/papers/new" },
     features: [
-      "Limited paper analyses",
+      "5 paper analyses per month",
       "Basic summary: TL;DR, findings, limitations",
       "Curated catalog and next-read suggestions",
-      "Paste text directly into the analyzer",
+      "Paste text or upload one PDF up to 5 MB",
+      "1 saved paper in your library",
     ],
     warm: false,
+    badge: null as string | null,
   },
   {
     id: "pro",
     name: "Pro",
-    price: "Early access",
-    cadence: "higher limits, full depth",
+    price: 5,
+    cadence: "per month",
+    priceNote: "Billed monthly · cancel anytime",
     kicker: "For serious daily reading",
     blurb: "Higher usage limits, advanced analysis, and multi-paper comparison.",
-    cta: { label: "Open the Pro workspace", href: "/papers/1?tab=mathematics" },
+    cta: { label: "Get Pro", href: "/papers/new" },
     features: [
-      "Everything in Free, with higher usage limits",
-      "Advanced analysis: math deep dives, derivations, notation glossary",
-      "PDF, PPT/PPTX and TXT upload, extracted server-side",
-      "Multi-paper comparison, claim by claim",
-      "Research notes, citations in 4 styles, evidence checklist",
+      "100 paper analyses per month",
+      "Math deep dives: equations, derivations, notation glossary",
+      "PDF · PPT/PPTX · TXT upload up to 15 MB",
+      "Two-paper comparison with synthesis and verdict",
+      "Deep research: experiment plans and reproducibility audit",
+      "Research notes, 4 citation styles, evidence checklist",
     ],
     warm: true,
+    badge: "Most popular" as string | null,
   },
   {
-    id: "institution",
-    name: "Research & Institution",
-    price: "Custom",
-    cadence: "scoped per lab or department",
-    kicker: "For groups reading together",
-    blurb: "Shared workspaces, collaborative research tools, and larger usage allowances.",
-    cta: { label: "See the comparison tool", href: "/compare" },
+    id: "premium",
+    name: "Premium",
+    price: 15,
+    cadence: "per month",
+    priceNote: "Billed monthly · cancel anytime",
+    kicker: "For labs and heavy readers",
+    blurb: "Everything in Pro plus shared workspaces, collaboration and the largest allowances.",
+    cta: { label: "Go Premium", href: "/papers/new" },
     features: [
-      "Everything in Pro, at team scale",
-      "Shared workspaces across your lab or department",
+      "Unlimited paper analyses",
+      "Everything in Pro, with priority document parsing",
+      "Shared workspace across your lab or department",
       "Collaborative research notes and a common library",
-      "Larger usage allowances and priority document parsing",
-      "Onboarding for research groups",
+      "Bulk import and library-wide search",
+      "Priority support and early access to new research tools",
     ],
     warm: false,
+    badge: null as string | null,
   },
 ];
 
-const MATRIX: { label: string; free: boolean | string; pro: boolean | string; team: boolean | string }[] = [
-  { label: "Paper analyses per month", free: "Limited", pro: "Higher", team: "Allocated per team" },
-  { label: "Basic summary & key findings", free: true, pro: true, team: true },
-  { label: "Math deep dives & derivations", free: false, pro: true, team: true },
-  { label: "PDF · PPT/PPTX · TXT upload", free: false, pro: true, team: true },
-  { label: "Multi-paper comparison", free: false, pro: true, team: true },
-  { label: "Citations, notes & evidence checklist", free: false, pro: true, team: true },
-  { label: "Shared workspace & collaboration", free: false, pro: false, team: true },
-  { label: "Usage allowance", free: "Basic", pro: "Higher", team: "Largest" },
+const INCLUDED_IN = [
+  { label: "Paper analyses per month", free: "5", pro: "100", premium: "Unlimited" },
+  { label: "Saved papers in library", free: "1", pro: "Unlimited", premium: "Unlimited" },
+  { label: "Upload size limit", free: "5 MB", pro: "15 MB", premium: "50 MB" },
+  { label: "Formats supported", free: "PDF · TXT", pro: "PDF · PPTX · TXT", premium: "PDF · PPTX · PPT · TXT" },
+];
+
+const MATRIX: { label: string; free: boolean | string; pro: boolean | string; premium: boolean | string }[] = [
+  { label: "Basic summary & key findings", free: true, pro: true, premium: true },
+  { label: "Catalog, suggestions & learning paths", free: true, pro: true, premium: true },
+  { label: "Math deep dives & derivations", free: false, pro: true, premium: true },
+  { label: "PPT/PPTX upload & larger files", free: false, pro: true, premium: true },
+  { label: "Multi-paper comparison & synthesis", free: false, pro: true, premium: true },
+  { label: "Deep research brief (experiments, audit)", free: false, pro: true, premium: true },
+  { label: "Notes, citations & evidence checklist", free: false, pro: true, premium: true },
+  { label: "Shared workspace & collaboration", free: false, pro: false, premium: true },
+  { label: "Priority parsing & support", free: false, pro: false, premium: true },
 ];
 
 function Cell({ value }: { value: boolean | string }) {
@@ -105,7 +122,7 @@ export default function PricingPage() {
               many people you read with.
             </p>
             <p className="mt-5 inline-flex rounded-full bg-white/50 px-3 py-1.5 text-[11px] font-medium text-[#6b4426] ring-1 ring-inset ring-white/60">
-              ScholarAI is in beta: all features below are open while plans are being finalized.
+              Prices in USD. Pro and Premium are billed monthly; cancel anytime. Beta launch pricing.
             </p>
           </div>
         </section>
@@ -126,20 +143,25 @@ export default function PricingPage() {
                   <h2 className={`display-sm text-[20px] ${tier.warm ? "text-[#fdf6ea]" : "text-ink"}`}>{tier.name}</h2>
                   <p className={`mt-0.5 text-[11px] ${tier.warm ? "text-[#fbe7cf]/75" : "text-muted"}`}>{tier.kicker}</p>
                 </div>
-                {tier.warm && (
-                  <span className="rounded-full bg-[#3b2415] px-2.5 py-1 text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[#fdf3e3]">
-                    Most depth
+                {tier.badge && (
+                  <span className={`rounded-full px-2.5 py-1 text-[9.5px] font-semibold uppercase tracking-[0.12em] ${
+                    tier.warm ? "bg-[#3b2415] text-[#fdf3e3]" : "bg-ember text-white"
+                  }`}>
+                    {tier.badge}
                   </span>
                 )}
               </div>
 
               <div className="mt-5">
-                <div className={`text-[clamp(1.6rem,3vw,2.1rem)] font-semibold tracking-[-0.03em] ${tier.warm ? "text-[#fdf6ea]" : "text-ink"}`}>
-                  {tier.price}
+                <div className="flex items-baseline gap-1.5">
+                  <span className={`text-[clamp(1.9rem,3.4vw,2.5rem)] font-semibold tracking-[-0.035em] ${tier.warm ? "text-[#fdf6ea]" : "text-ink"}`}>
+                    ${tier.price}
+                  </span>
+                  <span className={`text-[11px] font-medium ${tier.warm ? "text-[#fbe7cf]/75" : "text-muted"}`}>
+                    /{tier.cadence}
+                  </span>
                 </div>
-                <div className={`mt-0.5 text-[10.5px] uppercase tracking-[0.13em] ${tier.warm ? "text-[#fbe7cf]/70" : "text-muted"}`}>
-                  {tier.cadence}
-                </div>
+                <div className={`mt-1 text-[10.5px] ${tier.warm ? "text-[#fbe7cf]/65" : "text-muted"}`}>{tier.priceNote}</div>
               </div>
 
               <p className={`mt-4 text-[13px] leading-relaxed ${tier.warm ? "text-[#fbe7cf]/90" : "text-ink-soft"}`}>{tier.blurb}</p>
@@ -167,6 +189,35 @@ export default function PricingPage() {
           ))}
         </section>
 
+        {/* Allowances strip */}
+        <section className="mt-8">
+          <div className="flex flex-wrap items-end justify-between gap-2 border-b border-white/45 pb-3">
+            <h2 className="display-sm text-[20px] text-ink">Monthly allowances</h2>
+            <span className="text-[11px] text-muted">Same engine — priced by how much you read</span>
+          </div>
+          <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+            {INCLUDED_IN.map((row) => (
+              <div key={row.label} className="glass-inset p-4">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">{row.label}</div>
+                <dl className="mt-2.5 space-y-1.5 text-[11.5px]">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <dt className="text-ink-soft">Free</dt>
+                    <dd className="font-mono font-semibold text-ink">{row.free}</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <dt className="text-ink-soft">Pro · $5</dt>
+                    <dd className="font-mono font-semibold text-ember">{row.pro}</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <dt className="text-ink-soft">Premium · $15</dt>
+                    <dd className="font-mono font-semibold text-ink">{row.premium}</dd>
+                  </div>
+                </dl>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Comparison matrix */}
         <section id="compare" className="mt-8 scroll-mt-24">
           <div className="flex flex-wrap items-end justify-between gap-2 border-b border-black/[0.08] pb-3">
@@ -179,8 +230,8 @@ export default function PricingPage() {
                 <tr className="border-b border-black/[0.07] bg-white/32 backdrop-blur-md">
                   <th className="px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">Capability</th>
                   <th className="px-4 py-3 text-center text-[11px] font-semibold text-ink">Free</th>
-                  <th className="px-4 py-3 text-center text-[11px] font-semibold text-ember">Pro</th>
-                  <th className="px-4 py-3 text-center text-[11px] font-semibold text-ink">Institution</th>
+                  <th className="px-4 py-3 text-center text-[11px] font-semibold text-ink">Pro</th>
+                  <th className="px-4 py-3 text-center text-[11px] font-semibold text-ember">Premium</th>
                 </tr>
               </thead>
               <tbody>
@@ -194,7 +245,7 @@ export default function PricingPage() {
                       <Cell value={row.pro} />
                     </td>
                     <td className="border-t border-black/[0.05] px-4 py-3 text-center">
-                      <Cell value={row.team} />
+                      <Cell value={row.premium} />
                     </td>
                   </tr>
                 ))}
@@ -238,7 +289,7 @@ export default function PricingPage() {
           <div className="flex flex-col items-start justify-between gap-5 lg:flex-row lg:items-center">
             <div className="max-w-xl">
               <h2 className="display text-[clamp(1.6rem,3.2vw,2.3rem)] text-[#fdf6ea]">
-                Start on Free. Upgrade when the reading gets serious.
+                Start free, upgrade for $5 when the reading gets serious.
               </h2>
               <p className="mt-2.5 text-[13px] leading-relaxed text-[#fbe7cf]/85">
                 No card, no setup — paste a paper and read the analysis, including the equations, in seconds.
