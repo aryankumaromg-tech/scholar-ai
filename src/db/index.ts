@@ -27,6 +27,16 @@ function normaliseUrl(url: string): { connectionString: string; ssl: PoolConfig[
     parsed.searchParams.delete(key);
   }
 
+  const directSupabaseMatch = parsed.hostname.match(/^db\.([a-z0-9]+)\.supabase\.co$/i);
+  if (directSupabaseMatch) {
+    // Supabase direct database hosts are IPv6-only in this preview. Route the
+    // existing credentials through the project's IPv4 session pooler instead.
+    const projectRef = directSupabaseMatch[1];
+    parsed.hostname = "aws-0-ap-south-1.pooler.supabase.com";
+    parsed.port = "5432";
+    parsed.username = `postgres.${projectRef}`;
+  }
+
   const host = parsed.hostname;
   const isLocal = host === "localhost" || host === "127.0.0.1" || host === "::1" || host.endsWith(".local");
 
