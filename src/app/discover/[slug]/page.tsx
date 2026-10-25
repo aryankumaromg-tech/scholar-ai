@@ -142,8 +142,8 @@ export default async function CatalogPaperPage({ params }: { params: Promise<{ s
                           href={`/discover/${step.slug}`}
                           className={`flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-[12.5px] transition-colors ${
                             isCurrent
-                              ? "bg-[#f1e3d1] text-[#5c3a1c] ring-1 ring-inset ring-[#8a4c14]/15"
-                              : "text-ink-soft hover:bg-[#f3efe5] hover:text-ink"
+                              ? "bg-white/55 text-[#5c3a1c] ring-1 ring-inset ring-[#8a4c14]/15"
+                              : "text-ink-soft hover:bg-white/32 backdrop-blur-md hover:text-ink"
                           }`}
                         >
                           <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-black/[0.05] font-mono text-[9.5px]">{i + 1}</span>
@@ -201,7 +201,7 @@ export default async function CatalogPaperPage({ params }: { params: Promise<{ s
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex items-center justify-between gap-2 rounded-xl border border-black/[0.06] bg-[#f8f5ee] px-3 py-2 text-[11.5px] font-medium text-ink-soft transition-colors hover:border-ember/30 hover:text-ember"
+                    className="group flex items-center justify-between gap-2 rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md px-3 py-2 text-[11.5px] font-medium text-ink-soft transition-colors hover:border-ember/30 hover:text-ember"
                   >
                     {link.label}
                     <ArrowUpRight className="h-3 w-3 text-muted transition-transform group-hover:-translate-y-0.5" />

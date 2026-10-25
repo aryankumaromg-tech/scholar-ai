@@ -138,7 +138,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
             <select
               name="left"
               defaultValue={leftId}
-              className="mt-2 w-full rounded-xl border border-black/[0.09] bg-[#f8f5ee] px-3 py-2.5 text-[12px] text-ink outline-none focus:border-ember/40"
+              className="mt-2 w-full rounded-xl border border-black/[0.09] bg-white/45 backdrop-blur-md px-3 py-2.5 text-[12px] text-ink outline-none focus:border-ember/40"
             >
               {library.map((entry) => (
                 <option key={entry.paper.id} value={entry.paper.id}>
@@ -153,7 +153,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
             <select
               name="right"
               defaultValue={rightId}
-              className="mt-2 w-full rounded-xl border border-black/[0.09] bg-[#f8f5ee] px-3 py-2.5 text-[12px] text-ink outline-none focus:border-ember/40"
+              className="mt-2 w-full rounded-xl border border-black/[0.09] bg-white/45 backdrop-blur-md px-3 py-2.5 text-[12px] text-ink outline-none focus:border-ember/40"
             >
               {library.map((entry) => (
                 <option key={entry.paper.id} value={entry.paper.id}>
@@ -253,7 +253,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
             <section className="panel overflow-hidden p-0">
               <table className="w-full border-collapse text-left">
                 <thead>
-                  <tr className="border-b border-black/[0.07] bg-[#f3efe5]">
+                  <tr className="border-b border-black/[0.07] bg-white/32 backdrop-blur-md">
                     <th className="px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">Dimension</th>
                     <th className="px-4 py-3 text-[11px] font-semibold text-ink">Paper A</th>
                     <th className="px-4 py-3 text-[11px] font-semibold text-ink">Paper B</th>
@@ -261,7 +261,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
                 </thead>
                 <tbody>
                   {synthesis.contrasts.map((row, i) => (
-                    <tr key={row.dimension} className={i % 2 === 1 ? "bg-[#f8f5ee]/60" : ""}>
+                    <tr key={row.dimension} className={i % 2 === 1 ? "bg-white/45 backdrop-blur-md/60" : ""}>
                       <td className="border-t border-black/[0.05] px-5 py-2.5 text-[11.5px] font-medium text-ink-soft">{row.dimension}</td>
                       <td className="border-t border-black/[0.05] px-4 py-2.5 text-[11.5px] text-ink">{row.left}</td>
                       <td className="border-t border-black/[0.05] px-4 py-2.5 text-[11.5px] text-ink">{row.right}</td>
@@ -294,9 +294,9 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
                       <Link
                         key={item.slug}
                         href={`/discover/${item.slug}`}
-                        className="group flex items-start gap-3 rounded-xl border border-black/[0.06] bg-[#f8f5ee] px-3 py-2.5 transition-colors hover:border-ember/30"
+                        className="group flex items-start gap-3 rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md px-3 py-2.5 transition-colors hover:border-ember/30"
                       >
-                        <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white font-mono text-[9px] font-semibold text-[#8a4c14] ring-1 ring-inset ring-black/[0.05]">
+                        <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/55 font-mono text-[9px] font-semibold text-[#8a4c14] ring-1 ring-inset ring-black/[0.05]">
                           {item.year.toString().slice(2)}
                         </span>
                         <span className="min-w-0 flex-1">
@@ -350,7 +350,7 @@ function Metric({ icon, value, label }: { icon: React.ReactNode; value: React.Re
 function CompareRow({ title, left, right }: { title: string; left: string; right: string }) {
   return (
     <section className="panel overflow-hidden">
-      <header className="border-b border-black/[0.07] bg-[#f3efe5] px-5 py-2.5">
+      <header className="border-b border-black/[0.07] bg-white/32 backdrop-blur-md px-5 py-2.5">
         <h3 className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">{title}</h3>
       </header>
       <div className="grid md:grid-cols-2">

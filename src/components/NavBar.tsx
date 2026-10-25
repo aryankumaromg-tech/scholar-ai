@@ -26,7 +26,7 @@ export function NavBar() {
   return (
     <div className="sticky top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
       <div className="mx-auto max-w-6xl">
-        <header className="relative flex h-[58px] items-center justify-between gap-3 rounded-full border border-black/[0.07] bg-[#f8f5ee]/85 px-2.5 shadow-[0_10px_30px_-22px_rgba(27,24,21,0.5)] backdrop-blur-xl sm:h-[62px] sm:px-3">
+        <header className="relative flex h-[58px] items-center justify-between gap-3 rounded-full border border-white/70 bg-white/45 px-2.5 shadow-[0_1px_0_rgba(255,255,255,0.95)_inset,0_18px_38px_-26px_rgba(38,48,70,0.55)] backdrop-blur-2xl backdrop-saturate-150 sm:h-[62px] sm:px-3">
           <div className="flex items-center gap-1.5">
             <button
               type="button"
@@ -43,7 +43,7 @@ export function NavBar() {
                   key={item.href}
                   href={item.href}
                   className={`rounded-full px-3.5 py-2 text-[13px] font-medium transition-colors ${
-                    isActive(item.href) ? "bg-[#eee9dd] text-ink" : "text-ink-soft hover:bg-[#f1ede4] hover:text-ink"
+                    isActive(item.href) ? "bg-[#eee9dd] text-ink" : "text-ink-soft hover:bg-white/40 hover:text-ink"
                   }`}
                 >
                   {item.label}
@@ -51,7 +51,7 @@ export function NavBar() {
               ))}
               <Link
                 href="/discover#catalog"
-                className="flex items-center gap-1 rounded-full px-3.5 py-2 text-[13px] font-medium text-ink-soft transition-colors hover:bg-[#f1ede4] hover:text-ink"
+                className="flex items-center gap-1 rounded-full px-3.5 py-2 text-[13px] font-medium text-ink-soft transition-colors hover:bg-white/40 hover:text-ink"
               >
                 Catalog <ChevronDown className="h-3.5 w-3.5 opacity-50" />
               </Link>
@@ -69,7 +69,7 @@ export function NavBar() {
                   key={item.href}
                   href={item.href}
                   className={`rounded-full px-3 py-2 text-[13px] font-medium transition-colors ${
-                    isActive(item.href) ? "bg-[#eee9dd] text-ink" : "text-ink-soft hover:bg-[#f1ede4] hover:text-ink"
+                    isActive(item.href) ? "bg-[#eee9dd] text-ink" : "text-ink-soft hover:bg-white/40 hover:text-ink"
                   }`}
                 >
                   {item.label}
@@ -85,14 +85,14 @@ export function NavBar() {
         </header>
 
         {open && (
-          <div className="animate-fade-up mt-2 rounded-3xl border border-black/[0.07] bg-[#f8f5ee]/95 p-3 shadow-xl shadow-black/5 backdrop-blur-xl md:hidden">
+          <div className="animate-fade-up mt-2 rounded-3xl border border-black/[0.07] bg-white/45 backdrop-blur-md/95 p-3 shadow-xl shadow-black/5 backdrop-blur-xl md:hidden">
             <nav className="grid gap-1">
               {[{ href: "/", label: "Home" }, ...left, ...right].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-ink-soft transition-colors hover:bg-[#f1ede4] hover:text-ink"
+                  className="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-ink-soft transition-colors hover:bg-white/40 hover:text-ink"
                 >
                   {item.label}
                   <ArrowUpRight className="h-4 w-4 opacity-40" />

@@ -4,9 +4,9 @@ import type { CatalogItem } from "@/lib/catalog";
 import { DisplayMath } from "@/components/MathCard";
 
 const difficultyStyles: Record<string, string> = {
-  Beginner: "bg-[#e7efe3] text-[#41633a] ring-[#41633a]/15",
-  Intermediate: "bg-[#f7e7d3] text-[#8a4c14] ring-[#8a4c14]/15",
-  Advanced: "bg-[#f4ded6] text-[#8f3a24] ring-[#8f3a24]/15",
+  Beginner: "bg-[#e7efe3]/75 text-[#41633a] ring-[#41633a]/15",
+  Intermediate: "bg-[#f7e7d3]/75 text-[#8a4c14] ring-[#8a4c14]/15",
+  Advanced: "bg-[#f4ded6]/75 text-[#8f3a24] ring-[#8f3a24]/15",
 };
 
 export function formatCitations(n: number): string {
@@ -90,9 +90,9 @@ export function CompactSuggestion({ paper, reason }: { paper: CatalogItem; reaso
   return (
     <Link
       href={`/discover/${paper.slug}`}
-      className="group flex gap-3 rounded-2xl border border-transparent px-1 py-2 transition-colors hover:border-black/[0.05] hover:bg-[#f3efe5]"
+      className="group flex gap-3 rounded-2xl border border-transparent px-1 py-2 transition-colors hover:border-black/[0.05] hover:bg-white/32 backdrop-blur-md"
     >
-      <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#f1e3d1] font-mono text-[10px] font-semibold text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
+      <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/55 font-mono text-[10px] font-semibold text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
         {paper.year.toString().slice(2)}
       </span>
       <span className="min-w-0">

@@ -200,7 +200,7 @@ export default async function HomePage() {
               },
             ].map(({ icon: Icon, title, body, href, cta }) => (
               <Link key={title} href={href} className="panel hover-lift group p-5">
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#f1e3d1] text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-white/55 text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
                   <Icon className="h-4.5 w-4.5" />
                 </span>
                 <h3 className="display-sm mt-4 text-[17px] text-ink">{title}</h3>

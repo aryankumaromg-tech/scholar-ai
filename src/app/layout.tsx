@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import "katex/dist/katex.min.css";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { GlassBackdrop } from "@/components/GlassBackdrop";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -46,9 +47,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="grain min-h-screen bg-paper font-sans text-ink antialiased">
-        {children}
-        <Footer />
+      <body className="grain relative min-h-screen font-sans text-ink antialiased">
+        <GlassBackdrop />
+        <div className="relative z-10">
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

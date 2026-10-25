@@ -99,13 +99,13 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Sea
             {showcase && (
               <Link
                 href={`/discover/${showcase.slug}`}
-                className="group block rounded-2xl border border-black/[0.08] bg-[#fbf9f4] p-4 shadow-[0_18px_40px_-30px_rgba(27,24,21,0.6)] transition-colors hover:border-ember/30"
+                className="group block rounded-2xl border border-black/[0.08] bg-white/60 backdrop-blur-md p-4 shadow-[0_18px_40px_-30px_rgba(27,24,21,0.6)] transition-colors hover:border-ember/30"
               >
                 <div className="flex items-center justify-between">
                   <span className="flex items-center gap-1.5 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-[#8a6a45]">
                     <Sigma className="h-3 w-3" /> Featured equation
                   </span>
-                  <span className="rounded-full bg-[#f1e3d1] px-2 py-0.5 text-[9.5px] font-semibold text-[#8a4c14]">
+                  <span className="rounded-full bg-white/55 px-2 py-0.5 text-[9.5px] font-semibold text-[#8a4c14]">
                     {showcase.difficulty}
                   </span>
                 </div>
@@ -126,7 +126,7 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Sea
 
         {/* Filters */}
         <section className="mt-8 px-1">
-          <form action="/discover" method="get" className="flex items-center gap-2 rounded-full border border-black/[0.08] bg-[#fbf9f4] p-1.5 pl-4 focus-within:border-ember/35">
+          <form action="/discover" method="get" className="flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/60 backdrop-blur-md p-1.5 pl-4 focus-within:border-ember/35">
             <Search className="h-4 w-4 shrink-0 text-muted" />
             <input
               name="q"
@@ -158,7 +158,7 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Sea
               {DIFFICULTIES.map((d) => (
                 <FilterChip key={d} href={buildHref(base, { difficulty: d })} active={difficulty === d} label={d} />
               ))}
-              <span className="ml-auto flex items-center gap-0.5 rounded-full border border-black/[0.07] bg-[#fbf9f4] p-1">
+              <span className="ml-auto flex items-center gap-0.5 rounded-full border border-black/[0.07] bg-white/60 backdrop-blur-md p-1">
                 {SORTS.map((s) => (
                   <Link
                     key={s.id}
@@ -180,7 +180,7 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Sea
                 <span className="font-semibold text-ink">{results.length}</span> result{results.length === 1 ? "" : "s"}
                 {q && <> for &ldquo;{q}&rdquo;</>}
               </span>
-              <Link href="/discover" className="inline-flex items-center gap-1 rounded-full border border-black/[0.08] px-2 py-0.5 text-[10.5px] text-ink-soft hover:bg-[#f1ece1]">
+              <Link href="/discover" className="inline-flex items-center gap-1 rounded-full border border-black/[0.08] px-2 py-0.5 text-[10.5px] text-ink-soft hover:bg-white/50">
                 <X className="h-3 w-3" /> Clear
               </Link>
             </div>
@@ -239,9 +239,9 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Sea
                       <li key={paper.slug}>
                         <Link
                           href={`/discover/${paper.slug}`}
-                          className="group flex items-center gap-3 rounded-xl px-2 py-1.5 transition-colors hover:bg-[#f3efe5]"
+                          className="group flex items-center gap-3 rounded-xl px-2 py-1.5 transition-colors hover:bg-white/32 backdrop-blur-md"
                         >
-                          <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#f1e3d1] font-mono text-[9.5px] font-semibold text-[#8a4c14]">
+                          <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-white/55 font-mono text-[9.5px] font-semibold text-[#8a4c14]">
                             {i + 1}
                           </span>
                           <span className="min-w-0 flex-1 truncate text-[12.5px] text-ink-soft group-hover:text-ink">{paper.title}</span>
@@ -267,7 +267,7 @@ function FilterChip({ href, active, label }: { href: string; active: boolean; la
       className={`rounded-full px-2.5 py-1.5 text-[10.5px] font-medium transition-colors ${
         active
           ? "bg-[#1b1815] text-[#f8f4ec]"
-          : "border border-black/[0.08] bg-[#fbf9f4] text-ink-soft hover:border-black/20 hover:text-ink"
+          : "border border-black/[0.08] bg-white/60 backdrop-blur-md text-ink-soft hover:border-black/20 hover:text-ink"
       }`}
     >
       {label}

@@ -176,7 +176,7 @@ export default function PricingPage() {
           <div className="panel mt-4 overflow-x-auto p-0">
             <table className="w-full min-w-[560px] border-collapse text-left">
               <thead>
-                <tr className="border-b border-black/[0.07] bg-[#f3efe5]">
+                <tr className="border-b border-black/[0.07] bg-white/32 backdrop-blur-md">
                   <th className="px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">Capability</th>
                   <th className="px-4 py-3 text-center text-[11px] font-semibold text-ink">Free</th>
                   <th className="px-4 py-3 text-center text-[11px] font-semibold text-ember">Pro</th>
@@ -185,7 +185,7 @@ export default function PricingPage() {
               </thead>
               <tbody>
                 {MATRIX.map((row, i) => (
-                  <tr key={row.label} className={i % 2 === 1 ? "bg-[#f8f5ee]/60" : ""}>
+                  <tr key={row.label} className={i % 2 === 1 ? "bg-white/45 backdrop-blur-md/60" : ""}>
                     <td className="border-t border-black/[0.05] px-5 py-3 text-[12.5px] text-ink-soft">{row.label}</td>
                     <td className="border-t border-black/[0.05] px-4 py-3 text-center">
                       <Cell value={row.free} />
@@ -223,7 +223,7 @@ export default function PricingPage() {
               },
             ].map((item) => (
               <div key={item.title} className="panel-flat p-5 sm:p-6">
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#f1e3d1] text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-white/55 text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
                   <item.icon className="h-4.5 w-4.5" />
                 </span>
                 <h3 className="display-sm mt-3.5 text-[17px] text-ink">{item.title}</h3>

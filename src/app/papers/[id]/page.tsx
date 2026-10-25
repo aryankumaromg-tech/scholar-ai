@@ -56,7 +56,7 @@ function Panel({
   return (
     <section className="panel p-5 sm:p-6">
       <div className="mb-4 flex items-start gap-3">
-        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#f1e3d1] text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/55 text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
           {icon}
         </span>
         <div>
@@ -192,8 +192,8 @@ export default async function PaperDetailPage({
                 .split("\n\n")
                 .filter(Boolean)
                 .map((finding, i) => (
-                  <div key={i} className="flex gap-3 rounded-2xl border border-black/[0.06] bg-[#f8f5ee] p-4">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#f1e3d1] font-mono text-[10px] font-semibold text-[#8a4c14]">
+                  <div key={i} className="flex gap-3 rounded-2xl border border-black/[0.06] bg-white/45 backdrop-blur-md p-4">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/55 font-mono text-[10px] font-semibold text-[#8a4c14]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <p className="text-[13px] leading-relaxed text-ink-soft">{finding}</p>
@@ -257,7 +257,7 @@ export default async function PaperDetailPage({
             <ol className="relative space-y-4 border-l border-black/10 pl-6">
               {math.steps.map((step, i) => (
                 <li key={step.title} className="relative">
-                  <span className="absolute -left-[31px] grid h-6 w-6 place-items-center rounded-full border border-ember/25 bg-[#fbf9f4] font-mono text-[9.5px] font-semibold text-ember">
+                  <span className="absolute -left-[31px] grid h-6 w-6 place-items-center rounded-full border border-ember/25 bg-white/60 backdrop-blur-md font-mono text-[9.5px] font-semibold text-ember">
                     {i + 1}
                   </span>
                   <h4 className="text-[13px] font-semibold text-ink">{step.title}</h4>
@@ -276,7 +276,7 @@ export default async function PaperDetailPage({
             <Panel title="Notation glossary" icon={<FunctionSquare className="h-4 w-4" />} subtitle="Every symbol used above">
               <dl className="grid gap-2 sm:grid-cols-2">
                 {uniqueSymbols.map((sym) => (
-                  <div key={sym.symbol} className="flex items-start gap-2.5 rounded-xl border border-black/[0.06] bg-[#f8f5ee] px-3 py-2.5">
+                  <div key={sym.symbol} className="flex items-start gap-2.5 rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md px-3 py-2.5">
                     <span className="min-w-[52px] shrink-0 text-[12.5px] text-[#5c3a1c]">
                       <InlineMath tex={sym.symbol} />
                     </span>
@@ -404,7 +404,7 @@ export default async function PaperDetailPage({
               </div>
               <div className="grid gap-2 sm:grid-cols-3">
                 {libraryMatches.map(({ paper: p, analysis: a }) => (
-                  <Link key={p.id} href={`/papers/${p.id}`} className="panel-flat group p-4 transition-colors hover:bg-[#fbf9f4]">
+                  <Link key={p.id} href={`/papers/${p.id}`} className="panel-flat group p-4 transition-colors hover:bg-white/60 backdrop-blur-md">
                     <div className="flex items-center gap-2">
                       <DifficultyPill value={a.difficulty ?? "Intermediate"} />
                       <span className="font-mono text-[9.5px] text-muted">{a.mathScore ?? 50}/100</span>
@@ -446,7 +446,7 @@ export default async function PaperDetailPage({
             <ArrowLeft className="h-3.5 w-3.5" /> Back to library
           </Link>
           <div className="flex items-center gap-2">
-            <Link href={`/papers/${paper.id}?tab=mathematics`} className="inline-flex items-center gap-1.5 rounded-full border border-ember/25 bg-[#f7e7d3] px-3.5 py-2 text-[11.5px] font-semibold text-[#8a4c14] transition-colors hover:bg-[#f3ddc3]">
+            <Link href={`/papers/${paper.id}?tab=mathematics`} className="inline-flex items-center gap-1.5 rounded-full border border-ember/25 bg-[#f7e7d3]/75 px-3.5 py-2 text-[11.5px] font-semibold text-[#8a4c14] transition-colors hover:bg-[#f3ddc3]">
               <Sigma className="h-3.5 w-3.5" /> Deep dive maths
             </Link>
             <ReanalyzeButton paperId={paper.id} />
@@ -502,11 +502,11 @@ export default async function PaperDetailPage({
               <div className="mt-3 space-y-3">
                 <ScoreMeter value={mathScore} label="Maths density" />
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="rounded-xl border border-black/[0.06] bg-[#f8f5ee] p-3">
+                  <div className="rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md p-3">
                     <div className="font-mono text-[15px] font-semibold text-ink">{paper.content.split(/\s+/).filter(Boolean).length}</div>
                     <div className="text-[9.5px] uppercase tracking-wider text-muted">words</div>
                   </div>
-                  <div className="rounded-xl border border-black/[0.06] bg-[#f8f5ee] p-3">
+                  <div className="rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md p-3">
                     <div className="font-mono text-[15px] font-semibold text-ink">{history.length}</div>
                     <div className="text-[9.5px] uppercase tracking-wider text-muted">passes</div>
                   </div>
@@ -549,7 +549,7 @@ export default async function PaperDetailPage({
                   <Link
                     key={t}
                     href={`/discover?q=${encodeURIComponent(t)}`}
-                    className="rounded-full border border-black/[0.08] bg-[#f8f5ee] px-2.5 py-1 text-[10px] text-ink-soft transition-colors hover:border-ember/30 hover:text-ember"
+                    className="rounded-full border border-black/[0.08] bg-white/45 backdrop-blur-md px-2.5 py-1 text-[10px] text-ink-soft transition-colors hover:border-ember/30 hover:text-ember"
                   >
                     {t}
                   </Link>

@@ -132,8 +132,8 @@ export default async function SkillsPage({ searchParams }: { searchParams: Searc
                 <p className="text-[11px] font-semibold text-muted">Terminal</p>
                 <pre className="mt-1.5 overflow-x-auto rounded-xl border border-black/[0.07] bg-[#16130f] px-3.5 py-3 text-[12px] leading-relaxed text-[#f5d9b5]">{`npx ${SKILLS_NPM}`}</pre>
                 <p className="mt-2 text-[11px] leading-relaxed text-muted">
-                  Interactive installer: auto-detects your coding agents, installs to <code className="rounded bg-sand-200 px-1">~/.orchestra/skills/</code> and
-                  symlinks into each agent. Also offers <code className="rounded bg-sand-200 px-1">list</code> and <code className="rounded bg-sand-200 px-1">update</code>.
+                  Interactive installer: auto-detects your coding agents, installs to <code className="rounded bg-white/45 px-1">~/.orchestra/skills/</code> and
+                  symlinks into each agent. Also offers <code className="rounded bg-white/45 px-1">list</code> and <code className="rounded bg-white/45 px-1">update</code>.
                 </p>
               </div>
               <div>
@@ -186,7 +186,7 @@ install and use AI Research Skills.`}</pre>
 
         {/* Search + filters */}
         <section className="mt-8 px-1">
-          <form action="/skills" method="get" className="flex items-center gap-2 rounded-full border border-black/[0.08] bg-[#fbf9f4] p-1.5 pl-4 focus-within:border-ember/35">
+          <form action="/skills" method="get" className="flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/60 backdrop-blur-md p-1.5 pl-4 focus-within:border-ember/35">
             <Search className="h-4 w-4 shrink-0 text-muted" />
             <input
               name="q"
@@ -202,7 +202,7 @@ install and use AI Research Skills.`}</pre>
             <span className="mr-1 flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">
               <Filter className="h-3 w-3" /> Category
             </span>
-            <Link href={q ? `/skills?q=${encodeURIComponent(q)}` : "/skills"} className={`rounded-full px-3 py-1.5 text-[11px] font-medium ${!active ? "chip-active" : "border border-black/[0.08] bg-[#fbf9f4] text-ink-soft hover:border-black/20"}`}>
+            <Link href={q ? `/skills?q=${encodeURIComponent(q)}` : "/skills"} className={`rounded-full px-3 py-1.5 text-[11px] font-medium ${!active ? "chip-active" : "border border-black/[0.08] bg-white/60 backdrop-blur-md text-ink-soft hover:border-black/20"}`}>
               All
             </Link>
             {SKILL_CATEGORIES.map((category) => {
@@ -211,7 +211,7 @@ install and use AI Research Skills.`}</pre>
                 <Link
                   key={category.dir}
                   href={`/skills?cat=${encodeURIComponent(category.name)}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
-                  className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${isActive ? "chip-active" : "border border-black/[0.08] bg-[#fbf9f4] text-ink-soft hover:border-black/20"}`}
+                  className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${isActive ? "chip-active" : "border border-black/[0.08] bg-white/60 backdrop-blur-md text-ink-soft hover:border-black/20"}`}
                 >
                   {category.name}
                 </Link>
@@ -226,7 +226,7 @@ install and use AI Research Skills.`}</pre>
               {activeCategory && <> in {activeCategory.name}</>}
             </span>
             {(q || active) && (
-              <Link href="/skills" className="inline-flex items-center gap-1 rounded-full bg-sand-200 px-2.5 py-1 text-[11px] text-ink-600 hover:bg-sand-300">
+              <Link href="/skills" className="inline-flex items-center gap-1 rounded-full bg-white/45 px-2.5 py-1 text-[11px] text-ink-600 hover:bg-sand-300">
                 <X className="h-3 w-3" /> Clear
               </Link>
             )}
@@ -260,7 +260,7 @@ install and use AI Research Skills.`}</pre>
         </section>
 
         {/* Attribution */}
-        <section className="mt-8 rounded-[26px] border border-black/[0.08] bg-[#f3efe5] p-5 sm:p-7">
+        <section className="mt-8 rounded-[26px] border border-black/[0.08] bg-white/32 backdrop-blur-md p-5 sm:p-7">
           <div className="grid gap-5 md:grid-cols-[1.4fr_1fr] md:items-center">
             <div>
               <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted">
@@ -289,7 +289,7 @@ install and use AI Research Skills.`}</pre>
                 href={categoryUrl(category)}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 rounded-md bg-[#fbf9f4] px-2 py-1 text-[10.5px] text-ink-soft ring-1 ring-inset ring-black/[0.06] transition-colors hover:text-ember"
+                className="inline-flex items-center gap-1 rounded-md bg-white/60 backdrop-blur-md px-2 py-1 text-[10.5px] text-ink-soft ring-1 ring-inset ring-black/[0.06] transition-colors hover:text-ember"
               >
                 <CircuitBoard className="h-3 w-3" /> {category.name}
               </a>

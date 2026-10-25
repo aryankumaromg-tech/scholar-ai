@@ -26,7 +26,7 @@ export function MathCard({ equation, index, dark = false }: { equation: MathEqua
         <dl className="mt-4 grid gap-2 border-t border-black/[0.07] pt-3.5 sm:grid-cols-2">
           {equation.symbols.map((sym) => (
             <div key={sym.symbol} className="flex items-start gap-2.5">
-              <dt className="shrink-0 rounded-lg bg-[#f1ece1] px-2 py-1 text-[12.5px] text-[#5c3a1c] ring-1 ring-inset ring-black/[0.05]">
+              <dt className="shrink-0 rounded-lg bg-white/50 px-2 py-1 text-[12.5px] text-[#5c3a1c] ring-1 ring-inset ring-black/[0.05]">
                 <span dangerouslySetInnerHTML={{ __html: renderTex(sym.symbol, false) }} />
               </dt>
               <dd className="pt-0.5 text-[11.5px] leading-relaxed text-muted">{sym.meaning}</dd>

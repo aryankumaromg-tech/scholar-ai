@@ -17,9 +17,9 @@ import {
 import type { ResearchBrief as Brief } from "@/lib/research";
 
 const strengthStyles: Record<string, string> = {
-  Strong: "bg-[#e7efe3] text-[#41633a] ring-[#41633a]/15",
-  Moderate: "bg-[#f7e7d3] text-[#8a4c14] ring-[#8a4c14]/15",
-  Weak: "bg-[#f4ded6] text-[#8f3a24] ring-[#8f3a24]/15",
+  Strong: "bg-[#e7efe3]/75 text-[#41633a] ring-[#41633a]/15",
+  Moderate: "bg-[#f7e7d3]/75 text-[#8a4c14] ring-[#8a4c14]/15",
+  Weak: "bg-[#f4ded6]/75 text-[#8f3a24] ring-[#8f3a24]/15",
 };
 
 const statusIcon = {
@@ -44,7 +44,7 @@ function Card({
   return (
     <section className="panel p-5 sm:p-6">
       <div className="mb-4 flex items-start gap-3">
-        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#f1e3d1] text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/55 text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
           {icon}
         </span>
         <div>
@@ -68,7 +68,7 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
       >
         <ol className="space-y-2.5">
           {brief.questions.map((question, i) => (
-            <li key={question} className="flex gap-3 rounded-2xl border border-black/[0.06] bg-[#f8f5ee] p-3.5">
+            <li key={question} className="flex gap-3 rounded-2xl border border-black/[0.06] bg-white/45 backdrop-blur-md p-3.5">
               <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-ember/10 font-mono text-[10px] font-semibold text-ember">
                 Q{i + 1}
               </span>
@@ -82,10 +82,10 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
       <Card title="Experiment plan" subtitle="Concrete next steps with metrics and baselines" icon={<Beaker className="h-4 w-4" />}>
         <div className="grid gap-3 sm:grid-cols-2">
           {brief.experiments.map((experiment) => (
-            <article key={experiment.title} className="flex flex-col rounded-2xl border border-black/[0.07] bg-[#f8f5ee] p-4">
+            <article key={experiment.title} className="flex flex-col rounded-2xl border border-black/[0.07] bg-white/45 backdrop-blur-md p-4">
               <div className="flex items-start justify-between gap-2">
                 <h3 className="text-[13px] font-semibold leading-snug text-ink">{experiment.title}</h3>
-                <span className="shrink-0 rounded-md bg-white px-1.5 py-0.5 font-mono text-[9.5px] font-semibold text-ember ring-1 ring-inset ring-ember/15">
+                <span className="shrink-0 rounded-md bg-white/55 px-1.5 py-0.5 font-mono text-[9.5px] font-semibold text-ember ring-1 ring-inset ring-ember/15">
                   {experiment.effort}
                 </span>
               </div>
@@ -119,7 +119,7 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
         <Card title="Claim → evidence table" subtitle="Rate before you cite" icon={<ClipboardCheck className="h-4 w-4" />}>
           <div className="space-y-2.5">
             {brief.claims.map((claim, i) => (
-              <article key={`${claim.claim}-${i}`} className="rounded-2xl border border-black/[0.06] bg-[#f8f5ee] p-3.5">
+              <article key={`${claim.claim}-${i}`} className="rounded-2xl border border-black/[0.06] bg-white/45 backdrop-blur-md p-3.5">
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-[12px] font-medium leading-relaxed text-ink">{claim.claim}</p>
                   <span className={`shrink-0 rounded-full px-2 py-0.5 text-[9.5px] font-semibold ring-1 ring-inset ${strengthStyles[claim.strength]}`}>
@@ -140,7 +140,7 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
         <Card title="Reproducibility audit" subtitle="What you can rebuild from this paper" icon={<ClipboardCheck className="h-4 w-4" />}>
           <ul className="space-y-2">
             {brief.reproducibility.map((row) => (
-              <li key={row.item} className="flex gap-2.5 rounded-xl border border-black/[0.05] bg-[#f8f5ee] px-3 py-2.5">
+              <li key={row.item} className="flex gap-2.5 rounded-xl border border-black/[0.05] bg-white/45 backdrop-blur-md px-3 py-2.5">
                 <span className="mt-0.5 shrink-0">{statusIcon[row.status]}</span>
                 <span>
                   <span className="block text-[11.5px] font-semibold text-ink">{row.item}</span>
@@ -149,7 +149,7 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
               </li>
             ))}
           </ul>
-          <div className="mt-3 flex items-center justify-between rounded-xl bg-[#f1e3d1] px-3 py-2 text-[10.5px] font-semibold text-[#6b4426]">
+          <div className="mt-3 flex items-center justify-between rounded-xl bg-white/55 px-3 py-2 text-[10.5px] font-semibold text-[#6b4426]">
             <span>Audit score</span>
             <span>
               {Math.round(
@@ -179,7 +179,7 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
         <Card title="Follow-up work to do" subtitle="Small, high-yield next moves" icon={<Lightbulb className="h-4 w-4" />}>
           <ul className="space-y-2.5">
             {brief.followUps.map((item) => (
-              <li key={item.title} className="rounded-xl border border-black/[0.06] bg-[#f8f5ee] px-3 py-2.5">
+              <li key={item.title} className="rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md px-3 py-2.5">
                 <p className="text-[11.5px] font-semibold text-ink">{item.title}</p>
                 <p className="mt-0.5 text-[10.5px] leading-relaxed text-muted">{item.why}</p>
               </li>
@@ -192,7 +192,7 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
       <Card title="Working glossary" subtitle="Terms this paper assumes you know" icon={<Sigma className="h-4 w-4" />}>
         <dl className="grid gap-2 sm:grid-cols-2">
           {brief.glossary.map((entry) => (
-            <div key={entry.term} className="rounded-xl border border-black/[0.06] bg-[#f8f5ee] px-3 py-2.5">
+            <div key={entry.term} className="rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md px-3 py-2.5">
               <dt className="text-[11.5px] font-semibold text-ink">{entry.term}</dt>
               <dd className="mt-0.5 text-[10.5px] leading-relaxed text-muted">{entry.definition}</dd>
             </div>
@@ -209,9 +209,9 @@ export function ResearchBriefView({ brief, title }: { brief: Brief; title: strin
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-start gap-3 rounded-xl border border-black/[0.07] bg-[#f8f5ee] px-3.5 py-3 transition-colors hover:border-ember/30 hover:bg-[#fbf9f4]"
+              className="group flex items-start gap-3 rounded-xl border border-black/[0.07] bg-white/45 backdrop-blur-md px-3.5 py-3 transition-colors hover:border-ember/30 hover:bg-white/60 backdrop-blur-md"
             >
-              <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white text-ember ring-1 ring-inset ring-black/[0.06]">
+              <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/55 text-ember ring-1 ring-inset ring-black/[0.06]">
                 <ExternalLink className="h-3.5 w-3.5" />
               </span>
               <span className="min-w-0 flex-1">

@@ -89,7 +89,7 @@ export function NewPaperForm({ initial }: { initial: Prefill }) {
   }
 
   const inputClass =
-    "w-full rounded-xl border border-black/[0.1] bg-[#fbf9f4] px-3.5 py-2.5 text-[13px] text-ink placeholder:text-muted/60 outline-none transition-colors focus:border-ember/45 focus:bg-white focus:ring-2 focus:ring-ember/10";
+    "w-full rounded-xl border border-black/[0.1] bg-white/60 backdrop-blur-md px-3.5 py-2.5 text-[13px] text-ink placeholder:text-muted/60 outline-none transition-colors focus:border-ember/45 focus:bg-white/55 focus:ring-2 focus:ring-ember/10";
 
   const uploaded = form.fileName
     ? { fileName: form.fileName, fileType: form.fileType ?? "document", fileSize: form.fileSize ?? 0 }
@@ -139,7 +139,7 @@ export function NewPaperForm({ initial }: { initial: Prefill }) {
                 setForm(SAMPLE);
                 setError("");
               }}
-              className="inline-flex items-center gap-1.5 rounded-full border border-ember/20 bg-[#f7e7d3] px-2.5 py-1.5 text-[10.5px] font-semibold text-[#8a4c14] transition-colors hover:bg-[#f3ddc3]"
+              className="inline-flex items-center gap-1.5 rounded-full border border-ember/20 bg-[#f7e7d3]/75 px-2.5 py-1.5 text-[10.5px] font-semibold text-[#8a4c14] transition-colors hover:bg-[#f3ddc3]"
             >
               <Wand2 className="h-3 w-3" /> Fill a sample
             </button>
@@ -214,7 +214,7 @@ export function NewPaperForm({ initial }: { initial: Prefill }) {
         </div>
 
         {error && (
-          <div className="flex items-center gap-2.5 rounded-2xl border border-[#9c2f18]/20 bg-[#f4ded6] px-4 py-3 text-[12.5px] text-[#8f3a24]">
+          <div className="flex items-center gap-2.5 rounded-2xl border border-[#9c2f18]/20 bg-[#f4ded6]/75 px-4 py-3 text-[12.5px] text-[#8f3a24]">
             <AlertCircle className="h-4 w-4 shrink-0" />
             {error}
           </div>
@@ -235,7 +235,7 @@ export function NewPaperForm({ initial }: { initial: Prefill }) {
           <ul className="mt-3.5 space-y-2.5">
             {OUTPUTS.map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-2.5 text-[12px] text-ink-soft">
-                <span className="grid h-6 w-6 place-items-center rounded-full bg-[#f1e3d1] text-[#8a4c14]">
+                <span className="grid h-6 w-6 place-items-center rounded-full bg-white/55 text-[#8a4c14]">
                   <Icon className="h-3.5 w-3.5" />
                 </span>
                 {label}

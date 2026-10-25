@@ -52,10 +52,10 @@ interface WorkspaceAnalysis {
 }
 
 const noteColors: Record<string, string> = {
-  amber: "bg-[#f7e7d3] border-[#8a4c14]/15",
-  sage: "bg-[#e7efe3] border-[#41633a]/15",
-  rose: "bg-[#f4ded6] border-[#8f3a24]/15",
-  blue: "bg-[#e1ebef] border-[#41606d]/15",
+  amber: "bg-[#f7e7d3]/75 border-[#8a4c14]/15",
+  sage: "bg-[#e7efe3]/75 border-[#41633a]/15",
+  rose: "bg-[#f4ded6]/75 border-[#8f3a24]/15",
+  blue: "bg-[#e1ebef]/75 border-[#41606d]/15",
 };
 
 function authorParts(authors: string | null) {
@@ -178,14 +178,14 @@ export function ResearchWorkspace({
               value={noteTitle}
               onChange={(e) => setNoteTitle(e.target.value)}
               placeholder="Note title (optional)"
-              className="w-full rounded-xl border border-black/[0.09] bg-[#f8f5ee] px-3 py-2 text-[12px] outline-none focus:border-ember/40"
+              className="w-full rounded-xl border border-black/[0.09] bg-white/45 backdrop-blur-md px-3 py-2 text-[12px] outline-none focus:border-ember/40"
             />
             <textarea
               value={noteBody}
               onChange={(e) => setNoteBody(e.target.value)}
               rows={4}
               placeholder="Question, critique, connection, experiment idea…"
-              className="w-full resize-y rounded-xl border border-black/[0.09] bg-[#f8f5ee] px-3 py-2.5 text-[12px] leading-relaxed outline-none focus:border-ember/40"
+              className="w-full resize-y rounded-xl border border-black/[0.09] bg-white/45 backdrop-blur-md px-3 py-2.5 text-[12px] leading-relaxed outline-none focus:border-ember/40"
             />
             <div className="flex items-center justify-between gap-3">
               <div className="flex gap-1.5" aria-label="Note color">
@@ -229,7 +229,7 @@ export function ResearchWorkspace({
           <h2 className="display-sm mt-2 text-[18px] text-ink">Four formats, ready to paste</h2>
           <div className="mt-4 space-y-2.5">
             {Object.entries(citationMap).map(([style, value]) => (
-              <div key={style} className="rounded-2xl border border-black/[0.07] bg-[#f8f5ee] p-3.5">
+              <div key={style} className="rounded-2xl border border-black/[0.07] bg-white/45 backdrop-blur-md p-3.5">
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.13em] text-muted">{style}</span>
                   <button type="button" onClick={() => void copy(value, style)} className="flex items-center gap-1 text-[10.5px] font-semibold text-ember hover:text-ember-deep">
@@ -251,14 +251,14 @@ export function ResearchWorkspace({
             <FileSearch className="h-3.5 w-3.5" /> Search inside paper
           </div>
           <h2 className="display-sm mt-2 text-[18px] text-ink">Find every mention in context</h2>
-          <div className="mt-4 flex items-center gap-2 rounded-full border border-black/[0.09] bg-[#f8f5ee] px-3.5">
+          <div className="mt-4 flex items-center gap-2 rounded-full border border-black/[0.09] bg-white/45 backdrop-blur-md px-3.5">
             <Search className="h-3.5 w-3.5 text-muted" />
             <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search a term, method, dataset…" className="w-full bg-transparent py-2.5 text-[12px] outline-none" />
           </div>
           <div className="mt-3 space-y-2">
             {query.trim().length >= 2 && searchResults.length === 0 && <p className="text-[11px] text-muted">No exact mentions found.</p>}
             {searchResults.map((snippet, i) => (
-              <p key={`${snippet}-${i}`} className="rounded-xl border border-black/[0.06] bg-[#f8f5ee] px-3 py-2.5 text-[11.5px] leading-relaxed text-ink-soft">
+              <p key={`${snippet}-${i}`} className="rounded-xl border border-black/[0.06] bg-white/45 backdrop-blur-md px-3 py-2.5 text-[11.5px] leading-relaxed text-ink-soft">
                 …{snippet}…
               </p>
             ))}
@@ -290,10 +290,10 @@ export function ResearchWorkspace({
                       })
                     }
                     className={`flex w-full gap-3 rounded-xl border px-3 py-2.5 text-left transition-colors ${
-                      done ? "border-[#41633a]/15 bg-[#e7efe3]" : "border-black/[0.07] bg-[#f8f5ee] hover:border-ember/25"
+                      done ? "border-[#41633a]/15 bg-[#e7efe3]/75" : "border-black/[0.07] bg-white/45 backdrop-blur-md hover:border-ember/25"
                     }`}
                   >
-                    <span className={`mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded border ${done ? "border-[#41633a] bg-[#41633a] text-white" : "border-black/20 bg-white"}`}>
+                    <span className={`mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded border ${done ? "border-[#41633a] bg-[#41633a] text-white" : "border-black/20 bg-white/55"}`}>
                       {done && <Check className="h-3 w-3" />}
                     </span>
                     <span className={`text-[11.5px] leading-relaxed ${done ? "text-[#41633a] line-through opacity-75" : "text-ink-soft"}`}>{finding}</span>

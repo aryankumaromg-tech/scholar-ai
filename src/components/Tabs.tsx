@@ -20,7 +20,7 @@ export function Tabs({ tabs, initial }: { tabs: TabDef[]; initial?: string }) {
         <div
           role="tablist"
           aria-label="Paper analysis sections"
-          className="flex gap-1 overflow-x-auto rounded-full border border-black/[0.07] bg-[#f8f5ee]/92 p-1.5 shadow-[0_12px_30px_-24px_rgba(27,24,21,0.6)] backdrop-blur-xl"
+          className="flex gap-1 overflow-x-auto rounded-full border border-black/[0.07] bg-white/45 backdrop-blur-md/92 p-1.5 shadow-[0_12px_30px_-24px_rgba(27,24,21,0.6)] backdrop-blur-xl"
         >
           {tabs.map((tab) => {
             const selected = tab.id === current?.id;

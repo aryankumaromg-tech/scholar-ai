@@ -48,7 +48,7 @@ export default async function NewPaperPage({ searchParams }: { searchParams: Sea
         </Link>
 
         <section className="mt-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-[#fbf9f4] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8a4c14]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/60 backdrop-blur-md px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8a4c14]">
             <Sparkles className="h-3 w-3" /> New analysis
           </span>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
@@ -61,7 +61,7 @@ export default async function NewPaperPage({ searchParams }: { searchParams: Sea
                 and an equation-by-equation deep dive.
               </p>
             </div>
-            <div className="flex items-center gap-2 rounded-2xl border border-black/[0.07] bg-[#fbf9f4] px-4 py-3">
+            <div className="flex items-center gap-2 rounded-2xl border border-black/[0.07] bg-white/60 backdrop-blur-md px-4 py-3">
               <Sigma className="h-4 w-4 text-ember" />
               <div>
                 <div className="text-[11.5px] font-semibold text-ink">12 math kernels</div>
@@ -70,7 +70,7 @@ export default async function NewPaperPage({ searchParams }: { searchParams: Sea
             </div>
           </div>
           {from && (
-            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#f1e3d1] px-3 py-1.5 text-[11px] font-medium text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/15">
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/55 px-3 py-1.5 text-[11px] font-medium text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/15">
               Pre-filled from the catalog — add the full text for a richer math dive.
             </p>
           )}

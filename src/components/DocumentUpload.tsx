@@ -67,7 +67,7 @@ export function DocumentUpload({
   if (current) {
     const isPresentation = /ppt/i.test(current.fileType);
     return (
-      <div className="rounded-2xl border border-[#41633a]/20 bg-[#e7efe3]/70 p-4">
+      <div className="rounded-2xl border border-[#41633a]/20 bg-[#e7efe3]/75/70 p-4">
         <div className="flex items-start gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/70 text-[#41633a] ring-1 ring-inset ring-[#41633a]/10">
             {isPresentation ? <Presentation className="h-4.5 w-4.5" /> : <FileText className="h-4.5 w-4.5" />}
@@ -141,11 +141,11 @@ export function DocumentUpload({
         disabled={loading}
         className={`group w-full rounded-2xl border border-dashed px-5 py-7 text-center transition-all ${
           dragging
-            ? "border-ember bg-[#f7e7d3] shadow-[0_0_0_3px_rgba(194,95,33,0.08)]"
-            : "border-black/15 bg-[#f8f5ee] hover:border-ember/40 hover:bg-[#fbf9f4]"
+            ? "border-ember bg-[#f7e7d3]/75 shadow-[0_0_0_3px_rgba(194,95,33,0.08)]"
+            : "border-black/15 bg-white/45 backdrop-blur-md hover:border-ember/40 hover:bg-white/60 backdrop-blur-md"
         } disabled:cursor-wait`}
       >
-        <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-[#f1e3d1] text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10 transition-transform group-hover:-translate-y-0.5">
+        <span className="mx-auto grid h-11 w-11 place-items-center rounded-full bg-white/55 text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10 transition-transform group-hover:-translate-y-0.5">
           {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Upload className="h-5 w-5" />}
         </span>
         <span className="mt-3 block text-[13px] font-semibold text-ink">
@@ -155,7 +155,7 @@ export function DocumentUpload({
         <span className="mt-2 block text-[10px] text-muted/75">Your file is processed in memory; only extracted text is saved with the analysis.</span>
       </button>
       {error && (
-        <p className="mt-2 flex items-start gap-1.5 rounded-xl bg-[#f4ded6] px-3 py-2 text-[11px] leading-relaxed text-[#8f3a24]">
+        <p className="mt-2 flex items-start gap-1.5 rounded-xl bg-[#f4ded6]/75 px-3 py-2 text-[11px] leading-relaxed text-[#8f3a24]">
           <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" /> {error}
         </p>
       )}

@@ -8,7 +8,7 @@ export default function NotFound() {
     <div className="min-h-screen">
       <NavBar />
       <main className="mx-auto flex max-w-3xl flex-col items-center px-5 py-24 text-center">
-        <span className="grid h-16 w-16 place-items-center rounded-full bg-[#f1e3d1] text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
+        <span className="grid h-16 w-16 place-items-center rounded-full bg-white/55 text-[#8a4c14] ring-1 ring-inset ring-[#8a4c14]/10">
           <LotusMark className="h-8 w-8" />
         </span>
         <p className="eyebrow mt-6">404</p>
