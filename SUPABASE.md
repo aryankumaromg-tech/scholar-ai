@@ -36,6 +36,23 @@ Three things matter:
 > If your connection string starts with `postgresql://postgres:<password>@db.<ref>.supabase.co:5432`,
 > that is the **direct** host and is IPv6-only on newer projects. Serverless
 > platforms and many home networks can't reach it — use the pooler instead.
+>
+> `db.<ref>.supabase.co` resolving to a **AAAA record only** (and `ENETUNREACH`
+> when connecting) is this exact situation. The pooler host has IPv4 addresses.
+
+### Don't know your pooler region?
+
+The dashboard shows it, but you can also discover it. `npm run db:check` reports
+whether DNS/TCP work, and the pooler itself distinguishes an unknown project from
+a bad password:
+
+- `tenant/user postgres.<ref> not found` → wrong **region** or **ref**, or the
+  project was deleted
+- `password authentication failed` → the region **and** ref are correct; fix the password
+
+Pooler hosts follow `aws-0-<region>.pooler.supabase.com` (some projects use
+`aws-1-`). Regions include `us-east-1`, `us-west-1`, `eu-central-1`,
+`eu-west-1`, `ap-south-1`, `ap-southeast-1`, `ap-northeast-1`, `sa-east-1`.
 
 ## 3. Configure the environment
 
