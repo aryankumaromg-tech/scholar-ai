@@ -86,18 +86,32 @@ const poolConfig: PoolConfig = {
 // a new connection per request (Supabase's pooler has a hard client limit).
 const globalForDb = globalThis as typeof globalThis & {
   __scholarAiPool?: Pool;
+  __scholarAiPoolKey?: string;
 };
 
-export const pool = globalForDb.__scholarAiPool ?? new Pool(poolConfig);
+// Preview env vars can change while the module stays hot. Do not reuse a pool
+// created with the previous direct Supabase host in that case.
+const poolKey = `${connectionString}|${ssl ? "ssl" : "plain"}`;
+const cachedPool = globalForDb.__scholarAiPoolKey === poolKey
+  ? globalForDb.__scholarAiPool
+  : undefined;
 
-if (!globalForDb.__scholarAiPool) {
-  pool.on("error", (error) => {
+if (!cachedPool) {
+  globalForDb.__scholarAiPool = new Pool(poolConfig);
+  globalForDb.__scholarAiPoolKey = poolKey;
+  globalForDb.__scholarAiPool.on("error", (error) => {
     console.error("[db] idle client error:", error.message);
   });
-  globalForDb.__scholarAiPool = pool;
 }
 
-export const db = drizzle(pool);
+const activePool = globalForDb.__scholarAiPool;
+
+if (!activePool) {
+  throw new Error("Database pool failed to initialize");
+}
+
+export const pool = activePool;
+export const db = drizzle(activePool);
 
 /** Safe diagnostics for /api/health — never returns credentials. */
 export const dbInfo = {
