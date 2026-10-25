@@ -92,3 +92,15 @@ export const catalogPapers = pgTable("catalog_papers", {
   url: text("url"),
   featured: boolean("featured").default(false).notNull(),
 });
+
+export const payments = pgTable("payments", {
+  id: serial("id").primaryKey(),
+  planId: varchar("plan_id", { length: 40 }).notNull(),
+  amount: integer("amount").notNull(),
+  currency: varchar("currency", { length: 8 }).notNull(),
+  razorpayOrderId: varchar("razorpay_order_id", { length: 120 }).notNull().unique(),
+  razorpayPaymentId: varchar("razorpay_payment_id", { length: 120 }),
+  razorpaySignature: text("razorpay_signature"),
+  status: varchar("status", { length: 24 }).default("created").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

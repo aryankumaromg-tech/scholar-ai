@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NavBar } from "@/components/NavBar";
-import { ArrowRight, ArrowUpRight, Check, GraduationCap, Handshake, Minus, Sparkles } from "lucide-react";
+import { PlanCheckoutButton } from "@/components/PlanCheckoutButton";
+import { razorpayConfigured } from "@/lib/plans";
+import { ArrowRight, ArrowUpRight, Check, CreditCard, GraduationCap, Handshake, Minus, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Plans",
@@ -102,6 +104,7 @@ function Cell({ value }: { value: boolean | string }) {
 }
 
 export default function PricingPage() {
+  const paymentsReady = razorpayConfigured();
   return (
     <div className="min-h-screen">
       <NavBar />
@@ -175,19 +178,39 @@ export default function PricingPage() {
                 ))}
               </ul>
 
-              <Link
-                href={tier.cta.href}
-                className={
-                  tier.warm
-                    ? "mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#fdf6ea] px-4 py-3 text-[12.5px] font-semibold text-[#3b2415] transition-transform hover:-translate-y-0.5"
-                    : "btn-outline mt-6 w-full"
-                }
-              >
-                {tier.cta.label} <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
+              {tier.price > 0 ? (
+                <PlanCheckoutButton
+                  planId={tier.id as "pro" | "premium"}
+                  label={tier.cta.label}
+                  warm={tier.warm}
+                  priceLabel={`$${tier.price}/mo`}
+                />
+              ) : (
+                <Link
+                  href={tier.cta.href}
+                  className={
+                    tier.warm
+                      ? "mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#fdf6ea] px-4 py-3 text-[12.5px] font-semibold text-[#3b2415] transition-transform hover:-translate-y-0.5"
+                      : "btn-outline mt-6 w-full"
+                  }
+                >
+                  {tier.cta.label} <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              )}
             </article>
           ))}
         </section>
+
+        {!paymentsReady && (
+          <p className="mt-3 flex items-start gap-2 rounded-2xl border border-[#8a4c14]/20 bg-[#f7e7d3]/70 px-4 py-3 text-[11.5px] leading-relaxed text-[#6b4426] backdrop-blur-md">
+            <CreditCard className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+            <span>
+              <span className="font-semibold">Test mode:</span> the Razorpay key ID is configured, but{" "}
+              <code className="rounded bg-white/60 px-1 py-0.5">RAZORPAY_KEY_SECRET</code> is missing — checkout will not start
+              until it is added. Prices are display-only for the Free tier.
+            </span>
+          </p>
+        )}
 
         {/* Allowances strip */}
         <section className="mt-8">
