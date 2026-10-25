@@ -15,6 +15,7 @@ import {
   Lightbulb,
   Quote,
   Route,
+  Search,
   Sigma,
   Sparkles,
 } from "lucide-react";
@@ -179,6 +180,34 @@ export default async function CatalogPaperPage({ params }: { params: Promise<{ s
               >
                 Start the analysis <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
+            </div>
+
+            <div className="panel p-5">
+              <h2 className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+                <Search className="h-3.5 w-3.5 text-ember" /> Related research
+              </h2>
+              <p className="mt-2 text-[10.5px] leading-relaxed text-muted">
+                Live title searches on external indexes — cited-by lists, follow-ups, connected work.
+              </p>
+              <div className="mt-3 space-y-1.5">
+                {[
+                  { label: "Semantic Scholar", href: `https://www.semanticscholar.org/search?q=${encodeURIComponent(paper.title)}&sort=relevance` },
+                  { label: "Google Scholar", href: `https://scholar.google.com/scholar?q=${encodeURIComponent(paper.title)}` },
+                  { label: "Connected Papers", href: `https://www.connectedpapers.com/search?q=${encodeURIComponent(paper.title)}` },
+                  { label: "arXiv listings", href: `https://arxiv.org/a/search?query=${encodeURIComponent(paper.title)}&searchtype=all` },
+                ].map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-center justify-between gap-2 rounded-xl border border-black/[0.06] bg-[#f8f5ee] px-3 py-2 text-[11.5px] font-medium text-ink-soft transition-colors hover:border-ember/30 hover:text-ember"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="h-3 w-3 text-muted transition-transform group-hover:-translate-y-0.5" />
+                  </a>
+                ))}
+              </div>
             </div>
 
             <div className="panel-flat p-5">

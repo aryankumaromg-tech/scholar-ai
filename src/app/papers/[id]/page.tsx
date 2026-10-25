@@ -4,6 +4,8 @@ import { DisplayMath, InlineMath, MathCard } from "@/components/MathCard";
 import { RichText } from "@/components/RichText";
 import { ReanalyzeButton } from "@/components/ReanalyzeButton";
 import { ResearchWorkspace } from "@/components/ResearchWorkspace";
+import { ResearchBriefView } from "@/components/ResearchBrief";
+import { generateResearchBrief } from "@/lib/research";
 import { CompactSuggestion, DifficultyPill, SuggestionCard } from "@/components/PaperSuggestionCard";
 import { db } from "@/db";
 import { analyses, papers, researchNotes } from "@/db/schema";
@@ -18,6 +20,7 @@ import {
   ArrowLeft,
   ArrowUpRight,
   BookOpen,
+  Beaker,
   Brain,
   CheckCircle2,
   Clock,
@@ -101,7 +104,7 @@ export default async function PaperDetailPage({
   const { id } = await params;
   const sp = await searchParams;
   const requestedTab = typeof sp.tab === "string" ? sp.tab : "";
-  const initialTab = ["overview", "mathematics", "insights", "tools", "related"].includes(requestedTab) ? requestedTab : undefined;
+  const initialTab = ["overview", "mathematics", "research", "insights", "tools", "related"].includes(requestedTab) ? requestedTab : undefined;
 
   const paperId = Number.parseInt(id, 10);
   if (!Number.isFinite(paperId)) notFound();
@@ -123,6 +126,21 @@ export default async function PaperDetailPage({
   const readingMinutes = latest?.readingMinutes ?? Math.max(6, Math.round(paper.content.split(/\s+/).length / 180));
   const mathScore =
     latest?.mathScore ?? buildMathBreakdown({ title: paper.title, abstract: paper.abstract, content: paper.content }).mathScore;
+
+  const researchBrief = generateResearchBrief(
+    { title: paper.title, abstract: paper.abstract, content: paper.content, authors: paper.authors, year: paper.year },
+    {
+      keyFindings: latest?.keyFindings,
+      methodology: latest?.methodology,
+      limitations: latest?.limitations,
+      recommendations: latest?.recommendations,
+      contributions: latest?.contributions,
+      topics: latest?.topics,
+      domain: latest?.domain,
+      difficulty: latest?.difficulty,
+      mathScore: latest?.mathScore,
+    },
+  );
 
   const related = (await suggestForPaper(topics, domain, difficulty, 6))
     .filter((r) => r.item.title.toLowerCase() !== paper.title.toLowerCase())
@@ -286,6 +304,13 @@ export default async function PaperDetailPage({
           </div>
         </div>
       ),
+    },
+    {
+      id: "research",
+      label: "Deep research",
+      hint: `${researchBrief.questions.length}`,
+      icon: <Beaker className="h-3.5 w-3.5" />,
+      content: <ResearchBriefView brief={researchBrief} title={paper.title} />,
     },
     {
       id: "insights",
